@@ -1,0 +1,60 @@
+#!/bin/bash
+# ? shellcheck isn't compatible w/ zsh - https://github.com/koalaman/shellcheck/issues/809#issuecomment-277326918
+# * zsh-sweep might be a viable alternative - https://github.com/psprint/zsh-sweep
+
+# ZSH CONFIG
+alias zshconfig="vim ~/.zshrc"
+
+# WSL EXECUTABLES (incl. Windows binaries)
+alias ex='explorer.exe'
+
+# circumvents vscode bug where git diff gutters (and related extensions) don't work in symlink'd dirs
+# TODO - this may be resolved (see: https://code.visualstudio.com/updates/v1_81#_support-git-repositories-with-symbolic-links), verify the fix
+function vsc() {
+	code "$(readlink -f "$1")"
+}
+
+# jump to a specific string/flag on a man page (overrides the default `man` cmd) (from: https://unix.stackexchange.com/a/785323/413465)
+function man() {
+	command man "$1" | less -p "^ +(-.*, )?$2"
+}
+
+###########################
+# GIT & RELATED ALIASES
+# NOTE - see `~/.gitconfig` for other git-centric aliases
+###########################
+
+alias gs=gst # git status (uses omz alias)
+
+# delete last line from `commit.md` (inline markdownlint config) & pass into git commit msg
+gdo() {
+	awk 'NR>1{print prev} {prev=$0}' commit.md | git commit -F -
+}
+
+# GH PAGES
+alias ghportfolio='git push origin `git subtree split --prefix public master`:gh-pages --force' # https://stackoverflow.com/questions/33172857/how-do-i-force-a-subtree-push-to-overwrite-remote-changes
+
+# WPENGINE GIT CMDS
+alias gpstag='git push & git push staging master && fg'
+alias gpprod='git push & git push production master && fg'
+alias gpall='git push & git push staging master & git push production master && fg'
+
+###########################
+# DOCKER
+###########################
+
+alias dpa='docker ps -a' # list all containers (i.e. "docker process status all")
+
+###########################
+# PYTHON & RELATED ALIASES
+###########################
+
+# PIPENV
+alias activate='source env/bin/activate'
+
+# DJANGO
+alias pym='python manage.py' # prepend to manage cmds (used by AMPSIGHT aliases below)
+
+###########################
+# PROJECT-SPECIFIC ALIASES
+###########################

@@ -1,0 +1,30 @@
+*
+
+# VS Code
+!.vscode/
+!.vscode/*.json
+.vscode/argv.json
+
+# GitHub
+!.github
+!.github/*
+
+# git
+!.gitignore
+!.gitconfig
+
+# terminal (zsh + p10k)
+!.zshrc
+!.profile
+!.aliases
+!.p10k.zsh
+
+# `.config`
+!.config/
+.config/*
+!.config/wsl-configs/
+!.config/wsl-configs/*
+
+# `.docs`
+!.docs/
+!.docs/*
