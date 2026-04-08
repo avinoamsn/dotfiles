@@ -1,0 +1,46 @@
+{
+  "awsAuthRefresh": "~/.claude/hooks/check-aws-credentials.sh",
+  "env": {
+    "CLAUDE_CODE_USE_BEDROCK": "1",
+    "NODE_EXTRA_CA_CERTS": "$HOME/Certificates.pem",
+    "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "8192",
+    "MAX_THINKING_TOKENS": "1024",
+    "AWS_PROFILE": "default",
+    "AWS_REGION": "us-east-1"
+  },
+  "model": "us.anthropic.claude-opus-4-6-v1[1m]",
+  "enabledPlugins": {
+    "atlassian@tenbrain": true,
+    "github@tenbrain": true,
+    "knowledge-base@tenbrain": true,
+    "project-status@tenbrain": true,
+    "tenable-knowledge@tenbrain": true,
+    "ui-workflow@tenbrain": true,
+    "repomix@tenbrain": true,
+    "tenhud@tenbrain": true
+  },
+  "extraKnownMarketplaces": {
+    "tenbrain": {
+      "source": {
+        "source": "git",
+        "url": "git@github.com:tenb-Product/tenbrain.git"
+      },
+      "autoUpdate": true
+    }
+  },
+  "effortLevel": "high",
+  "mcp": {
+    "env": {
+      "CLAUDE_CODE_USE_BEDROCK": 1,
+      "NODE_EXTRA_CA_CERTS": "$HOME/Certificates.pem",
+      "CLAUDE_CODE_MAX_OUTPUT_TOKENS": 8192,
+      "MAX_THINKING_TOKENS": 1024,
+      "AWS_PROFILE": "default",
+      "AWS_REGION": "us-east-1"
+    }
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "/Users/anerenberg/.claude/statusline-command.sh"
+  }
+}

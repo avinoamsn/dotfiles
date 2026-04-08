@@ -11,14 +11,31 @@ COMPLETION_WAITING_DOTS="true"
 
 plugins=(
   git
+  git-auto-fetch
+  git-escape-magic
+  git-extras
+  gitfast
+  gitignore
+  gh
+  node
+  npm
+  nvm
   aws
+  docker
+  jira
+  macos
+  brew
+  # dirhistory
+  alias-finder
   # zsh-autocomplete
   zsh-autosuggestions
   zsh-syntax-highlighting
   fast-syntax-highlighting
   zsh-history-substring-search
+  man
+  colored-man-pages
+  tldr
   # virtualenvwrapper # NOTE - this plugin could replace the custom python venv activation func I have in `.profile` if I switched to `virtualenv`, which looks like a good alternative b/c it appears to be widely used & supported online
-  jira
 )
 
 # fix text pasting lag zsh-syntax-highlighting.zsh (from: https://gist.github.com/magicdude4eva/2d4748f8ef3e6bf7b1591964c201c1ab)
@@ -68,3 +85,12 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 # load tenable-specific configs
 [ ! -e ~/.tenable ] || . ~/.tenable
+
+# bit
+case ":$PATH:" in
+  *":/Users/anerenberg/bin:"*) ;;
+  *) export PATH="$PATH:/Users/anerenberg/bin" ;;
+esac
+# bit end
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

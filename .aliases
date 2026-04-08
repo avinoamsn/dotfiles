@@ -1,6 +1,5 @@
-#!/bin/bash
-# ? shellcheck isn't compatible w/ zsh - https://github.com/koalaman/shellcheck/issues/809#issuecomment-277326918
-# * zsh-sweep might be a viable alternative - https://github.com/psprint/zsh-sweep
+# shellcheck disable=SC2148,SC1090
+# NOTE - shellcheck isn't compatible w/ zsh (see: https://github.com/koalaman/shellcheck/issues/809#issuecomment-277326918), zsh-sweep might be a viable alternative (see: https://github.com/psprint/zsh-sweep)
 
 # ZSH CONFIG
 alias zshconfig="vim ~/.zshrc"
@@ -31,6 +30,39 @@ gdo() {
 	awk 'NR>1{print prev} {prev=$0}' commit.md | git commit -F -
 }
 
+# git stash staged changes
+# NOTE - the current resetting behavior is specific to the `client` dir in SVMUI (see NOTE below)
+# TODO - can `git restore` improve/replace this? See: https://stackoverflow.com/a/58003889/5425359
+gstas() {
+	local message=""
+
+	# Parse options
+	while getopts "m:" opt; do
+		case $opt in
+		m)
+			message="$OPTARG"
+			;;
+		*)
+			echo "Usage: gstas [-m <message>]"
+			return 1
+			;;
+		esac
+	done
+
+	gsta --keep-index
+
+	if [[ -n "$message" ]]; then
+		gsta -m "$message"
+	else
+		gsta
+	fi
+
+	gstaa stash@\{1\}
+	# TODO - update this cmd such that it checks out every file EXCEPT for `.gitignore` & `.vscode/settings.json`)
+	gco HEAD -- client # NOTE - this is specific to SVMUI, where I maintain untracked changes (in `.gitignore` & `.vscode/settings.json`), otherwise, this could be, e.g., `grhh`
+	gstd stash@\{1\}
+}
+
 # GH PAGES
 alias ghportfolio='git push origin `git subtree split --prefix public master`:gh-pages --force' # https://stackoverflow.com/questions/33172857/how-do-i-force-a-subtree-push-to-overwrite-remote-changes
 
@@ -38,12 +70,6 @@ alias ghportfolio='git push origin `git subtree split --prefix public master`:gh
 alias gpstag='git push & git push staging master && fg'
 alias gpprod='git push & git push production master && fg'
 alias gpall='git push & git push staging master & git push production master && fg'
-
-###########################
-# DOCKER
-###########################
-
-alias dpa='docker ps -a' # list all containers (i.e. "docker process status all")
 
 ###########################
 # PYTHON & RELATED ALIASES
@@ -56,5 +82,9 @@ alias activate='source env/bin/activate'
 alias pym='python manage.py' # prepend to manage cmds (used by AMPSIGHT aliases below)
 
 ###########################
-# PROJECT-SPECIFIC ALIASES
+# NPM & RELATED ALIASES
 ###########################
+alias nr='npm run'
+
+# TODO - load tenable-specific aliases
+[ ! -e ~/.tenable-aliases ] || . ~/.tenable-aliases

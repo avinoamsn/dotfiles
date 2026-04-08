@@ -1,39 +1,12 @@
 [user]
 	name = Avi Nerenberg
-	email = anerenberg@tenable.com
-	signingkey = /Users/anerenberg/.ssh/id_ed25519.pub
+	email = avinerenberg@gmail.com
+	signingkey = /Users/anerenberg/.ssh/id_ed25519_personal.pub
 [core]
 	autocrlf = false
 	editor = code -w
-[alias]
-	unstage = reset --
-	# git commit tree formatted printouts - https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs
-	lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-	lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n'' %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
-	lg = !"git lg1"
-	# revert modified permissions - https://stackoverflow.com/a/4408378/5425359
-	permission-reset = ! git diff -p -R --no-ext-diff --no-color | grep -E '\"^(diff|(old|new) mode)\"' --color=never | git apply
-	# list git aliases
-	alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
-	# rm branches with a deleted upstream (w/ confirmation) - combination of: https://stackoverflow.com/a/31776247/5425359, https://stackoverflow.com/a/28464339/5425359
-	# ! can delete working branches w/ uncommitted changes, use with caution
-	# NOTE - check out this page for another (possibly more robust) approach: https://blog.mimacom.com/git-aliases-you-wished-you-had/
-	# NOTE - also see omz's similar aliases `gbg`, `gbgd` & `gbgD`
-	gone = ! git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' >/tmp/merged-branches && vi /tmp/merged-branches && xargs -r git branch -D </tmp/merged-branches
-	# open the diff b/w two commits in VSCode
-	open-diff = ! git diff --name-only $1 $2 | xargs -I {} code "{}"
-	# open a PR's modified files in VSCode - https://stackoverflow.com/a/2233926/5425359
-	# NOTE - relies on `gh` to get the PR diff
-	open-pr-diff = ! gh pr diff --name-only | xargs -I {} code "{}"
-	# run ESLint on a PR's modified files
-	pr-lint = ! gh pr diff --name-only | xargs -I {} npx eslint --fix {}
-	# from: https://compiledsuccessfully.dev/git-skip-worktree/
-	# checks for any files flagged w/ --skip-worktree alias
-	check = ls-files -v | grep '^S'
-	# add --skip-worktree flag to file
-	skip = "! f() {  git update-index --skip-worktree "$@";  git status; }; f"
-	# remove --skip-worktree flag from file
-	unskip = "! f() {  git update-index --no-skip-worktree "$@";  git status; }; f"
+[checkout]
+  defaultRemote = origin
 [commit]
 	gpgsign = true
 	signoff = true
@@ -45,3 +18,40 @@
 	smudge = cat
 [push]
 	autoSetupRemote = true
+[alias]
+	unstage = reset --
+	# git commit tree formatted printouts - https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs
+	lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n'' %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+	lg = !"git lg1"
+	# revert modified permissions - https://stackoverflow.com/a/4408378/5425359
+	permission-reset = ! git diff -p -R --no-ext-diff --no-color | grep -E '\"^(diff|(old|new) mode)\"' --color=never | git apply
+	# list git aliases
+	alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
+	# rm branches with a deleted upstream (w/ confirmation) - combination of: https://stackoverflow.com/a/31776247/5425359, https://stackoverflow.com/a/28464339/5425359
+	# ! will delete working branches w/ uncommitted changes, use with caution
+	# NOTE - check out this page for another (possibly more robust) approach: https://blog.mimacom.com/git-aliases-you-wished-you-had/
+	# NOTE - also see omz's similar aliases `gbg`, `gbgd` & `gbgD`
+	gone = ! git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' >/tmp/merged-branches && vi /tmp/merged-branches && xargs -r git branch -D </tmp/merged-branches
+	# open the diff b/w two commits in VSCode
+	open-diff = ! git diff --name-only $1 $2 | xargs -I {} code "{}"
+	# open a PR's modified files in VSCode - https://stackoverflow.com/a/2233926/5425359
+	# NOTE - relies on `gh` to get the PR diff
+	open-pr-diff = ! gh pr diff --name-only | xargs -I {} code "{}"
+	# run ESLint on a PR's modified files
+	# NOTE - may not register the local ESLint configuration, depending on the setup
+	pr-lint = ! gh pr diff --name-only | xargs -I {} npx eslint --fix {}
+	# open a new PR on GH web
+	ghprcw = ! gh pr create -w
+	# view the current branch on GH web
+	ghvbw = ! gh repo view -b $(git_current_branch) -w
+	# checks for any files flagged w/ --skip-worktree alias (from: https://compiledsuccessfully.dev/git-skip-worktree/)
+	check = ls-files -v | grep '^S'
+	# add --skip-worktree flag to file
+	skip = "! f() {  git update-index --skip-worktree "$@";  git status; }; f"
+	# remove --skip-worktree flag from file
+	unskip = "! f() {  git update-index --no-skip-worktree "$@";  git status; }; f"
+
+# Conditional configuration for tenable repositories (GitHub Enterprise)
+[includeIf "gitdir:/Users/anerenberg/tenable/"]
+	path = ~/.gitconfig-tenable

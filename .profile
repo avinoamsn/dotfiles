@@ -1,3 +1,6 @@
+# shellcheck disable=SC2148,SC1090,SC1091
+# NOTE - shellcheck isn't compatible w/ zsh (see: https://github.com/koalaman/shellcheck/issues/809#issuecomment-277326918), zsh-sweep might be a viable alternative (see: https://github.com/psprint/zsh-sweep)
+
 ##################
 # misc
 ##################
