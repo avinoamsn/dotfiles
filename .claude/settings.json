@@ -8,7 +8,69 @@
     "AWS_PROFILE": "default",
     "AWS_REGION": "us-east-1"
   },
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(aws sts get-caller-identity:*)",
+      "Bash(git stash:*)",
+      "Bash(~/.claude/hooks/check-aws-credentials.sh:*)",
+      "Bash(gh issue:*)",
+      "Bash(claude --version)",
+      "Bash(ls ~/.claude/plugins/marketplaces/*/plugins/*/hooks/)",
+      "Bash(bash /Users/anerenberg/.claude/plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/hooks/stop-hook.sh)",
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(npx prettier:*)",
+      "Bash(/Users/anerenberg/.claude/plugins/marketplaces/tenbrain/plugins/knowledge-base/.venv/bin/python3 /Users/anerenberg/.claude/plugins/marketplaces/tenbrain/plugins/knowledge-base/hooks/conversation_recorder.py assistant)",
+      "Bash(echo \"---EXIT: $?\")",
+      "Bash(git mv:*)",
+      "Bash(pkill -f cypress)",
+      "Bash(pkill -9 -f cypress)",
+      "Bash(git restore:*)",
+      "Bash(npx cypress:*)",
+      "Bash(npx eslint:*)",
+      "Bash(grep -v \"^$\\\\|^[a-f0-9]\")",
+      "Bash(npx tsc:*)",
+      "Bash(git status:*)",
+      "Bash(npm test:*)",
+      "Bash($CLAUDE_PLUGIN_ROOT/.venv/bin/python3:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(docker info:*)",
+      "Bash(docker-compose up:*)",
+      "Bash(docker exec tenbrain-kb-postgres:*)",
+      "Bash(npx vitest:*)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(git log:*)",
+      "Bash(grep -rn:*)",
+      "Bash(git add:*)",
+      "Bash(wc:*)",
+      "Bash(node -e ':*)",
+      "Bash(npm ls:*)",
+      "Bash(git diff-tree:*)",
+      "Bash(sort -k2)",
+      "Bash(grep -E \"\\\\.ts$\")",
+      "Bash(grep:*)",
+      "Bash(npm --prefix client run lint -- --no-warn-ignored src/app/explore/findings/details/common/asset-summary-tab/AssetSummaryTabContent.tsx src/app/explore/findings/details/common/asset-summary-tab/LastSeenSection.tsx src/libs/findings/fields/definitions/tab-sections/common.ts src/libs/findings/fields/definitions/tab-sections/cloud-resources.ts src/libs/findings/fields/definitions/tab-sections/asm.ts src/app/explore/findings/details/common/__specs__/LastSeenSection.cy.tsx)",
+      "Bash(npm --prefix /Users/anerenberg/tenable/service-vm-ui/client run test:cy:run -- --spec \"src/app/recast/details/__specs__/RecastSummaryTab.cy.tsx\")",
+      "Bash(node:*)",
+      "Bash(git rm:*)",
+      "Bash(ls client/cypress.config.*)",
+      "Bash(head -30 client/cypress.config.ts)",
+      "Bash(head -30 client/cypress.config.js)",
+      "Bash(git checkout *)",
+      "Read(//tmp/**)",
+      "Bash(CLAUDE_PLUGIN_ROOT=\"/Users/anerenberg/.claude/plugins/marketplaces/tenbrain/plugins/knowledge-base\" /Users/anerenberg/.claude/plugins/marketplaces/tenbrain/plugins/knowledge-base/.venv/bin/python3 /Users/anerenberg/.claude/plugins/marketplaces/tenbrain/plugins/knowledge-base/hooks/conversation_recorder.py user)",
+      "Bash(CLAUDE_PLUGIN_ROOT=\"/Users/anerenberg/.claude/plugins/marketplaces/claude-plugins-official/plugins/hookify\" python3 /Users/anerenberg/.claude/plugins/marketplaces/claude-plugins-official/plugins/hookify/hooks/userpromptsubmit.py)",
+      "Bash(uv --version)",
+      "Bash(uv venv *)",
+      "Bash(uv pip *)"
+    ],
+    "defaultMode": "default"
+  },
   "model": "us.anthropic.claude-opus-4-6-v1[1m]",
+  "statusLine": {
+    "type": "command",
+    "command": "/Users/anerenberg/.claude/statusline-command.sh"
+  },
   "enabledPlugins": {
     "atlassian@tenbrain": true,
     "github@tenbrain": true,
@@ -28,7 +90,6 @@
       "autoUpdate": true
     }
   },
-  "effortLevel": "high",
   "mcp": {
     "env": {
       "CLAUDE_CODE_USE_BEDROCK": 1,
@@ -38,9 +99,5 @@
       "AWS_PROFILE": "default",
       "AWS_REGION": "us-east-1"
     }
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "/Users/anerenberg/.claude/statusline-command.sh"
   }
 }

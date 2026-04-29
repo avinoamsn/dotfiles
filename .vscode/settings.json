@@ -84,6 +84,7 @@
 	"files.exclude": {
 		".claude/todos": true,
 		".claude/telemetry": true,
+		".claude/tasks": true,
 		".claude/statusline-command.sh": true,
 		".claude/shell-snapshots": true,
 		".claude/sessions": true,
