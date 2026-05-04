@@ -5,6 +5,7 @@
 [core]
 	autocrlf = false
 	editor = code -w
+	# excludesfile = /Users/anerenberg/.gitignore_global
 [checkout]
   defaultRemote = origin
 [commit]

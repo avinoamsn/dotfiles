@@ -66,7 +66,7 @@
     ],
     "defaultMode": "default"
   },
-  "model": "us.anthropic.claude-opus-4-6-v1[1m]",
+  "model": "us.anthropic.claude-opus-4-7[1m]",
   "statusLine": {
     "type": "command",
     "command": "/Users/anerenberg/.claude/statusline-command.sh"
@@ -98,6 +98,17 @@
       "MAX_THINKING_TOKENS": 1024,
       "AWS_PROFILE": "default",
       "AWS_REGION": "us-east-1"
+    }
+  },
+  "mcpServers": {
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest",
+        "--browser",
+        "chromium"
+      ]
     }
   }
 }

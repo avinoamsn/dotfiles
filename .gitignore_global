@@ -16,7 +16,7 @@
 !.github/*
 
 # git
-!.gitignore
+!.gitignore_global
 !.gitconfig
 
 # terminal (zsh + p10k)
