@@ -79,7 +79,9 @@
     "tenable-knowledge@tenbrain": true,
     "ui-workflow@tenbrain": true,
     "repomix@tenbrain": true,
-    "tenhud@tenbrain": true
+    "tenhud@tenbrain": true,
+    "essentials@tenforge": true,
+    "ui@tenforge": true
   },
   "extraKnownMarketplaces": {
     "tenbrain": {
@@ -88,6 +90,12 @@
         "url": "git@github.com:tenb-Product/tenbrain.git"
       },
       "autoUpdate": true
+    },
+    "tenforge": {
+      "source": {
+        "source": "git",
+        "url": "git@github.com:tenb-Product/tenforge.git"
+      }
     }
   },
   "mcp": {
